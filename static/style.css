@@ -1,0 +1,32 @@
+body {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+}
+
+.main-title {
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    opacity: 0.8;
+}
+
+.custom-card {
+    border-radius: 15px;
+    padding: 20px;
+    transition: 0.4s;
+    background: white;
+    color: black;
+}
+
+.custom-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.icon-style {
+    font-size: 50px;
+}

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Image Detection</title>
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+<!-- Correct Flask Static Path -->
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+<h2 class="text-center text-white">
+<i class="bi bi-image-fill text-primary"></i>
+Image Deepfake Detection
+</h2>
+
+<div class="card upload-card mt-4 mx-auto p-4">
+
+<input type="file"
+id="imageInput"
+class="form-control mb-3"
+accept="image/*">
+
+<div class="d-grid">
+<button class="btn btn-primary" onclick="detectImage()">
+<i class="bi bi-search"></i> Detect Image
+</button>
+</div>
+
+<div class="text-center mt-4">
+<img id="previewImage"
+class="img-fluid rounded"
+style="display:none; max-height:300px;">
+</div>
+
+<div id="resultSection"
+class="result-box text-center mt-4"
+style="display:none;">
+
+<h5>
+Result:
+<span id="resultText" class="fw-bold"></span>
+</h5>
+
+<div class="progress mt-3">
+<div id="confidenceBar"
+class="progress-bar"
+style="width:0%">
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="text-center mt-4">
+<a href="/" class="btn btn-light">
+<i class="bi bi-arrow-left-circle"></i> Back to Home
+</a>
+</div>
+
+</div>
+
+<script>
+
+async function detectImage() {
+
+let fileInput = document.getElementById("imageInput");
+let preview = document.getElementById("previewImage");
+
+if (fileInput.files.length === 0) {
+alert("Please upload an image first!");
+return;
+}
+
+let file = fileInput.files[0];
+
+preview.src = URL.createObjectURL(file);
+preview.style.display = "block";
+
+let formData = new FormData();
+formData.append("file", file);
+
+document.getElementById("resultSection").style.display = "block";
+document.getElementById("resultText").innerText = "Analyzing image...";
+
+let bar = document.getElementById("confidenceBar");
+bar.style.width = "40%";
+bar.innerText = "Processing...";
+bar.className = "progress-bar bg-warning";
+
+try {
+
+let response = await fetch("/predict_media", {
+method: "POST",
+body: formData
+});
+
+let data = await response.json();
+let result = data.result;
+
+document.getElementById("resultText").innerText = result;
+
+if(result.toLowerCase().includes("fake")){
+document.getElementById("resultText").className = "text-danger fw-bold";
+
+bar.style.width = "90%";
+bar.innerText = "High Fake Probability";
+bar.className = "progress-bar bg-danger";
+}
+else{
+document.getElementById("resultText").className = "text-success fw-bold";
+
+bar.style.width = "90%";
+bar.innerText = "High Real Probability";
+bar.className = "progress-bar bg-success";
+}
+
+}
+catch(error){
+
+document.getElementById("resultText").innerText = "Error analyzing image";
+
+bar.style.width = "100%";
+bar.innerText = "Error";
+bar.className = "progress-bar bg-secondary";
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

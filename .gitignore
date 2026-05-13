@@ -1,0 +1,41 @@
+# Virtual Environments
+venv/
+deepfake_env/
+env/
+
+# Python Cache Files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# Dataset Folders
+dataset/
+faces_dataset/
+frames_dataset/
+test_dataset/
+
+# Zip Files
+*.zip
+
+# System Files
+.DS_Store
+Thumbs.db
+
+
+# Logs
+*.log
+
+# Temporary Files
+temp/
+tmp/
+
+# Large Model Checkpoints (optional)
+*.ckpt
+
+# Environment Variables
+.env
+
