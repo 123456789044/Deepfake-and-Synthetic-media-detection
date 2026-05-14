@@ -172,7 +172,7 @@ The system predicts whether uploaded media is:
 ---
 
 | Real Audio Prediction | Fake Audio Prediction |
-|-----------------------|-----------------------|
+|----------------------|-----------------------|
 | ![](assets/screenshots/audioresult1.jpeg) | ![](assets/screenshots/audioresult2.jpeg) |
 
 ---
