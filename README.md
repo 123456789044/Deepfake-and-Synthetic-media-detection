@@ -18,7 +18,7 @@ Deepfake and Synthetic Media Detection is a multi-modal AI-based system designed
 
 ## Project Structure
 
-```plaintext
+``plaintext
 Deepfake-and-Synthetic-media-detection/
 │
 ├── audio/                 # Audio deepfake detection module
